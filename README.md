@@ -1,19 +1,27 @@
-This is a Dockerfile setup for plex with plexpass - http://plex.tv/
+lonix/plex
+=============
+plexp. with or without plexpass to run the latest edition 
 
-To run the latest plexpass version:
 
+sample command:
 ```
-docker run -d --net="host" --name="plex" -v /path/to/plex/config:/config -v /path/to/video/files:/data -v /etc/localtime:/etc/localtime:ro -p 32400:32400 needo/plex
-```
-
-If you would like to specify a specific version of plex to run:
-
-```
-docker run -d --net="host" --name="plex" -v /path/to/plex/config:/config -v /path/to/video/files:/data -v /etc/localtime:/etc/localtime:ro -e VERSION=0.9.9.8.436-8abe5c0 -p 32400:32400 needo/plex
+docker run -d --name=plex --net=host -v /etc/localtime:/etc/localtime:ro -v /mnt/appdata/docker/plex:/config -v /mnt/net:/data  -e PLEXPASS=1 -p 32400:32400 lonix/plex:latest
 ```
 
-NOTE: It *must* be the full version name (i.e. 0.9.9.8.436-8abe5c0) replace with the version you desire in the command above
+You need to map 
+* --net=host for streaming to work.
+* Port 32400 for plex web-app.
+* Mount /config for plex config files.
+* Mount /data for plex media files
+* Mount /etc/localhost for timesync (Not required)
+* PLEXPASS set to 1 for Plexpass version, UNSET for Public
 
-After install go to:
 
-http://server:32400/web/index.html#!/dashboard and login with your myPlex credentials
+
+This container will update plex on each launch (if update found). It is based on phusion-baseimage with ssh removed. (use nsenter).
+If the app does not update to the latest version, i need to update a file on server, msg me at <lonixx@gmail.com>
+
+**Credits**
+* needo <needo@superhero.org>
+* Eric Schultz <eric@startuperic.com>
+* Tim Haak <tim@haak.co.uk>
