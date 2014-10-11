@@ -2,10 +2,12 @@ lonix/plex
 =============
 plexp. with or without plexpass to run the latest edition 
 
+**Notice**
+uid/gid has changed from 999 to 996 
 
 sample command:
 ```
-docker run -d --name=plex --net=host -v /etc/localtime:/etc/localtime:ro -v /mnt/appdata/docker/plex:/config -v /mnt/net:/data  -e PLEXPASS=1 -p 32400:32400 lonix/plex:latest
+docker run -d --name=plex --net=host -v /etc/localtime:/etc/localtime:ro -v <path to plex library>:/config -v <path to media>:/data  -e PLEXPASS=1 -p 32400:32400 lonix/plex:1.2
 ```
 
 You need to map 
