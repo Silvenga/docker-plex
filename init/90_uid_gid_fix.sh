@@ -1,5 +1,7 @@
-if [ ! "$(id -u plex)" -eq "$UID" ]; then usermod -u "$UID" plex ; fi
-if [ ! "$(id -g plex)" -eq "$GID" ]; then usermod -g "$GID" plex ; fi
+#!/bin/bash
+
+if [ ! "$(id -u plex)" -eq "$PUID" ]; then usermod -u "$PUID" plex ; fi
+if [ ! "$(id -g plex)" -eq "$PGID" ]; then groupmod -g "$PGID" plex ; fi
 
 echo "
 -----------------------------------
@@ -10,3 +12,4 @@ Plex gid:    $(id -g plex)
 -----------------------------------
 Plex will now continue to boot.
 "
+sleep 2
