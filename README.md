@@ -21,3 +21,7 @@ This Dockerfile will pull the latest version of Plex for Ubuntu every 24 hours. 
 * needo <needo@superhero.org>
 * Eric Schultz <eric@startuperic.com>
 * Tim Haak <tim@haak.co.uk>
+
+## TODO
+
+* Wondering if using Phusion might be too heavy. I might switch to the base Ubuntu image. 
