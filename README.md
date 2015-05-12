@@ -1,27 +1,23 @@
-lonix/plex
-=============
-plexp. with or without plexpass to run the latest edition 
+# Silvenga/docker-plex
 
+## Build
 
-sample command:
 ```
-docker run -d --name=plex --net=host -v /etc/localtime:/etc/localtime:ro -v <path to plex library>:/config -v <path to media>:/data  -e PUID=996 -e PGID=996 -e PLEXPASS=1 -p 32400:32400 lonix/plex:1.2
+docker build --tag local/plex .
 ```
 
-You need to map 
-* --net=host for streaming to work.
-* Port 32400 for plex web-app.
-* Mount /config for plex config files.
-* Mount /data for plex media files
-* Mount /etc/localhost for timesync (Not required)
-* PLEXPASS set to 1 for Plexpass version, UNSET for Public
-* GUID and GPID set toyou local plex user group (you may need to create a user on the host (named plex))
+## Run
 
+```
+docker run -d --name=plex -v /etc/localtime:/etc/localtime:ro -v <path to plex library>:/config -v <path to media>:/data -p 32400:32400 local/plex
+```
 
-This container will update plex on each launch (if update found). It is based on phusion-baseimage with ssh removed. (use nsenter).
-If the app does not update to the latest version, i need to update a file on server, msg me at <lonixx@gmail.com>
+> `--net=host` can be added to the above if you want localarea discovery to work. I personally don't care so I might as well sandbox Plex. 
+
+This Dockerfile will pull the latest version of Plex for Ubuntu every 24 hours. If an update is required, just rebuild and deploy. 
 
 **Credits**
+* lonix <lonixx@gmail.com>
 * needo <needo@superhero.org>
 * Eric Schultz <eric@startuperic.com>
 * Tim Haak <tim@haak.co.uk>
